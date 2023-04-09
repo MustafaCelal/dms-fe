@@ -1,0 +1,38 @@
+<div *ngIf="delivery" class="container">
+  <a [routerLink]="['/dealer/',delivery.dealer.id]"
+     style="margin-bottom: 15px; cursor: pointer; text-decoration: underline;">&#8592; Back to
+    deliveries</a>
+  <div class="text-center"><span class="text-primary fw-bold">{{delivery.deliveryTime}}</span></div>
+  <div class="container sepet border border-2" style="border-radius: 8px">
+    <div class="row">
+      <div class="col m-3">
+        <div class="container border border-2"
+             style="padding: 8% 3%; border-radius: 8px">
+          <div *ngFor="let item of delivery.deliveryItems" class="row">
+            <div class="col">
+              <div class="card mb-1">
+                <div class="card-body">
+                  {{item.productName}} , <strong>{{item.quantity}}</strong> * <strong>{{item.productPrice}}</strong>
+                  ₺<br/>
+                  <div class="col d-flex align-items-center mt-2">
+                    <span>Ara toplam : <strong>{{item.subTotal}}</strong> ₺</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col m-3">
+        <div class="container text-center" style="padding: 10% 10%">
+          <p>Toplam : <strong>{{delivery.totalAmount}}</strong> ₺</p>
+          <p>Ödenen : <strong>{{delivery.paidAmount}}</strong> ₺</p>
+          <p>Kalan : <strong>{{delivery.remainingAmount}}</strong> ₺</p>
+          <hr/>
+          <p>Eski Borç :<strong>{{delivery.previousDebt}}</strong> ₺</p>
+          <p>Yeni Borç: <strong>{{delivery.newDebt}}</strong> ₺</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

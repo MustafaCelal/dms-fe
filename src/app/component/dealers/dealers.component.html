@@ -1,0 +1,31 @@
+<div *ngIf="hasDealer" class="card">
+  <div class="card-body">
+    <h5>Dealer Api</h5>
+    <p class="card-text">Count : {{dealerList.length}}</p>
+    <p class="card-text">Version : {{"1.0.12"}}</p>
+  </div>
+</div>
+<br>
+<table *ngIf="hasDealer" class="table table-striped">
+  <thead class="table-light">
+  <tr>
+    <th scope="col">ID</th>
+    <th scope="col">Name</th>
+    <th scope="col">Address</th>
+    <th scope="col">Phone Number</th>
+    <th scope="col"></th>
+  </tr>
+  </thead>
+
+  <tbody>
+    <tr *ngFor="let dealer of dealerList; let i =index">
+      <td>{{dealer.id}}</td>
+      <td>{{dealer.name}}</td>
+      <td>{{dealer.address}}</td>
+      <td>{{dealer.phoneNumber}}</td>
+      <td>
+        <button [routerLink]="['/dealer',dealer.id]" type="button" class="button btn btn-primary">View</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
