@@ -5,8 +5,6 @@ import {Dealer} from "../../interface/dealer.interface";
 import {Delivery} from "../../interface/delivery.interface";
 import {DeliveryService} from "../../service/delivery.service";
 
-
-
 @Component({
   selector: 'app-dealerDetail',
   templateUrl: './dealerdetail.component.html',
@@ -40,6 +38,5 @@ export class DealerdetailComponent implements OnInit {
       );
     });
   }
-
 
 }

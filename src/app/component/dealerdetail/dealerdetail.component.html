@@ -17,6 +17,7 @@
           </div>
         </div>
       </div>
+      <button [routerLink]="['/delivery', {'dealerId':dealer.id}]" class="btn btn-lg btn-primary my-2">Teslimat</button>
     </div>
     <div *ngIf="deliveryCount" class="previous-deliveries col-lg-8">
       <div *ngFor="let delivery of deliveries;" class="delivery-summary">
