@@ -1,5 +1,5 @@
 export interface Dealer {
-  id: number;
+  id?: number;
   name: string;
   address: string;
   phoneNumber: string;

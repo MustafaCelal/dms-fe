@@ -3,7 +3,7 @@ import {DeliveryItem} from "./deliveryItem.interface";
 
 export interface Delivery {
 
-  id: number;
+  id?: number;
   deliveryTime:string;
   newDebt: number;
   paidAmount: number;
