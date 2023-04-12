@@ -6,6 +6,9 @@ import {ProductsComponent} from './products.component';
 import {MatIconModule} from "@angular/material/icon";
 import {MatButtonModule} from "@angular/material/button";
 import {ProducteditComponent} from './productedit/productedit.component';
+import {MatDialogModule} from "@angular/material/dialog";
+import {FormsModule} from "@angular/forms";
+import {MatInputModule} from "@angular/material/input";
 
 
 @NgModule({
@@ -17,7 +20,10 @@ import {ProducteditComponent} from './productedit/productedit.component';
     CommonModule,
     ProductsRoutingModule,
     MatIconModule,
-    MatButtonModule
+    MatButtonModule,
+    MatDialogModule,
+    FormsModule,
+    MatInputModule
   ]
 })
 export class ProductsModule {

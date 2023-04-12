@@ -30,6 +30,11 @@ export class ProductService {
       .delete<any>(`${this.apiUrl}/product/${product.id}`);
   }
 
+  updateProduct(product: Product) {
+    return this.http
+      .put<any>(`${this.apiUrl}/product/${product.id}`, product);
+  }
+
   private mapProductListResponse(productList: Product[]): any {
     return productList.map((product: any) => (this.mapProductResponse(product)))
   }
