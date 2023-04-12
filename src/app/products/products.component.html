@@ -1,0 +1,29 @@
+<div class="container w-75">
+  <h1 class="text-center">Ürünler</h1>
+  <table *ngIf="true" class="table table-striped text-center">
+    <thead class="table-light">
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">Adı</th>
+      <th scope="col">Satış Fiyatı</th>
+      <th scope="col">Aksiyon</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr *ngFor="let product of productList; let i =index" class="align-middle">
+      <td>{{product.id}}</td>
+      <td>{{product.productName}}</td>
+      <td>{{product.salePrice}}</td>
+      <td>
+        <button mat-icon-button color="primary" aria-label="delete icon" class="mx-3" (click)="editProduct(product)">
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button mat-icon-button color="warn" aria-label="delete icon" class="mx-3" (click)="deleteProduct(product)">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>

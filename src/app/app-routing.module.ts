@@ -10,6 +10,7 @@ const routes: Routes = [
   {path: 'dealer/:id', component: DealerdetailComponent},
   {path: 'delivery/:deliveryId', component: DeliverydetailComponent},
   {path: 'delivery', component: DeliveryComponent},
+  {path: 'products', loadChildren: () => import('./products/products.module').then(m => m.ProductsModule)},
   {path: '**', redirectTo: 'dealer'}
 ];
 
