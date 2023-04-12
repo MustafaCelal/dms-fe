@@ -31,9 +31,12 @@ export class DeliveryService {
       .pipe(map((response) => this.mapDeliveryResponse(response)));
   }
 
+  postDelivery(delivery: Delivery): void {
+    this.http.post(`${this.apiUrl}/delivery`, delivery)
+  }
+
   private mapDeliveryListResponse(deliveryList: Delivery[]): any {
     return deliveryList.map((delivery: any) => (this.mapDeliveryResponse(delivery)))
-
   }
 
   private mapDeliveryResponse(delivery: Delivery): any {
@@ -48,8 +51,6 @@ export class DeliveryService {
       dealer: delivery.dealer,
       deliveryItems: delivery.deliveryItems
     }
-
-
   }
 
   formatDate(dateInput: string): string {

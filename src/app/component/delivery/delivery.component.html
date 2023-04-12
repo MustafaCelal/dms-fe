@@ -1,99 +1,103 @@
 <div class="row mb-4">
   <div *ngIf="true" class="dealer-info col-4 me-5">
-    <div class="card">
+    <div *ngIf="dealer" class="card">
       <div class="card-body">
         <div class="d-flex flex-column align-items-center text-center">
           <!--<img [src]=dealer.imageUrl alt="Admin"
                class="rounded-circle p-1 bg-primary" width="110">-->
           <div class="mt-3">
-            <h4>{{" dealer.name" }}</h4>
-            <p class="text-secondary mb-1">{{ "dealer.phoneNumber" }}</p>
-            <p class="text-muted font-size-sm">{{ "dealer.address "}}</p>
-            <p class="text-muted font-size-sm">{{ "dealer.debt "}}</p>
+            <h4>{{dealer.name}}</h4>
+            <p class="text-secondary mb-1">{{ dealer.phoneNumber }}</p>
+            <p class="text-muted font-size-sm">{{dealer.address}}</p>
+            <p class="text-danger font-size-sm"><strong>Borç:{{ dealer.debt }}</strong></p>
 
           </div>
         </div>
       </div>
     </div>
   </div>
-  <form class="col-3">
+  <form [formGroup]="deliveryItemForm" (ngSubmit)="onButtonClick()" class="col-7">
     <div class="card">
-      <div class="card-body">
-        <div class="form-group my-3 w-100">
-          <mat-form-field appearance="fill">
-            <mat-label>Select</mat-label>
-            <mat-select>
-              <mat-option value="one">First option</mat-option>
-              <mat-option value="two">Second option</mat-option>
+      <div class="card-header">
+        <div class="row">
+          <mat-form-field class="col-6">
+            <mat-label>Ürün</mat-label>
+            <mat-select formControlName="product" [(ngModel)]="selectedProduct">
+              <mat-option *ngFor="let product of products" [value]="product">{{product.productName}}</mat-option>
             </mat-select>
           </mat-form-field>
-        </div>
 
-        <div class="form-group me-4">
-          <div class="input-group">
-            <span class="input-group-text">Adet</span>
-            <input type="number" step="0.25" class="form-control"/>
+          <mat-form-field class="col-6">
+            <mat-label>Miktar</mat-label>
+            <input matInput type="number" [(ngModel)]="quantity" formControlName="quantity">
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col">
+            <mat-label class="fs-5">Birim Fiyat: <span *ngIf="selectedProduct">{{selectedProduct.salePrice}}₺</span>
+            </mat-label>
+          </div>
+          <div class="col">
+            <mat-label class="fs-5">Ara Toplam: <span
+              *ngIf="quantity>0&&selectedProduct">{{quantity * selectedProduct.salePrice}}₺</span></mat-label>
           </div>
         </div>
-
-        <div class="form-group mt-3 fs-5">
-          <label for="selectedNameOrder">Birim Fiyat:</label>
-          <label id="selectedNameOrder" name="selectedNameOrder"></label>
+      </div>
+      <div class="card-footer">
+        <div class="float-end">
+          <button type="submit" class="btn btn-lg btn-primary">Ekle</button>
         </div>
-
-        <div class="form-group my-2 fs-5">
-          <label for="selectedNameValue">Ara Toplam:</label>
-          <label id="selectedNameValue" name="selectedNameValue"></label>
-        </div>
-
-        <button type="submit" class="float-end btn btn-lg btn-primary">Ekle</button>
       </div>
     </div>
   </form>
 </div>
+
 <div class="container sepet border border-2 fs-5" style="border-radius: 8px">
   <div class="row">
     <div class="col my-4 border-end">
       <table *ngIf="true" class="table table-striped">
         <thead class="table-light">
         <tr>
-          <th scope="col">Name</th>
-          <th scope="col">fiyat</th>
-          <th scope="col">adet</th>
+          <th scope="col">Ürün Adı</th>
+          <th scope="col">Fiyat</th>
+          <th scope="col">Miktar</th>
           <th scope="col">Ara toplam</th>
           <th scope="col"></th>
         </tr>
         </thead>
 
         <tbody>
-        <tr>
-          <td>Çiğköfte</td>
-          <td>26.5</td>
-          <td>15</td>
-          <td>397,5 ₺</td>
+        <tr *ngFor="let deliveryItem of deliveryItems;">
+          <td>{{deliveryItem.productName}}</td>
+          <td>{{deliveryItem.productPrice}}</td>
+          <td>{{deliveryItem.quantity}}</td>
+          <td>{{deliveryItem.subTotal}}</td>
           <td>
-            <button type="button" class="btn-close bg-danger" aria-label="Close"></button>
+            <button type="button" class="btn-close bg-danger" (click)="removeItem(deliveryItem)"></button>
           </td>
         </tr>
         </tbody>
       </table>
     </div>
-
     <div class="col my-4">
       <div class="row text-center">
         <div class="col-5 mx-5">
-          <p>Toplam : 530,00 ₺</p>
-          <p>Kalan : <span class="text-danger fw-bold">300,00</span> ₺</p>
+          <p>Toplam : {{mainTotal}} ₺</p>
+          <p>Kalan : <span class="text-danger fw-bold">{{remaining}}</span> ₺</p>
           <div class="input-group mb-3">
-            <span class="input-group-text">Ödenen</span>
-            <input type="number" step="0.25" class="form-control"/>
-            <span class="input-group-text">₺</span>
+
+            <mat-form-field>
+              <mat-label>Ödenen</mat-label>
+              <input matInput type="number" step="0.25" [(ngModel)]="paidAmount" (input)="inputChanged()">
+            </mat-form-field>
           </div>
         </div>
         <div class="col border-start">
-          <p>Eski Borç :0,00 ₺</p>
-          <p>Yeni Borç: <span class="text-danger fw-bold">230,00</span> ₺</p>
-          <button class="btn btn-primary">Tamamla</button>
+          <p>Eski Borç : <span *ngIf="dealer">{{dealer.debt}}</span> ₺</p>
+          <p>Yeni Borç : <span *ngIf="dealer" class="text-danger fw-bold">{{dealer.debt + remaining}}</span> ₺</p>
+          <button class="btn btn-primary" (click)="completeOrder()">Tamamla</button>
         </div>
       </div>
     </div>
