@@ -31,8 +31,8 @@ export class DeliveryService {
       .pipe(map((response) => this.mapDeliveryResponse(response)));
   }
 
-  postDelivery(delivery: Delivery): void {
-    this.http.post(`${this.apiUrl}/delivery`, delivery)
+  postDelivery(delivery: Delivery){
+    this.http.post(`${this.apiUrl}/delivery`, delivery).subscribe()
   }
 
   private mapDeliveryListResponse(deliveryList: Delivery[]): any {
