@@ -1,6 +1,8 @@
 import {Component} from '@angular/core';
 import {Product} from "../interface/product.interface";
 import {ProductService} from "../service/product.service";
+import {MatDialog} from "@angular/material/dialog";
+import {ProducteditComponent} from "./productedit/productedit.component";
 
 @Component({
   selector: 'app-products',
@@ -10,7 +12,7 @@ import {ProductService} from "../service/product.service";
 export class ProductsComponent {
   productList: Product[] = [];
 
-  constructor(private productService: ProductService) {
+  constructor(private productService: ProductService, public dialog: MatDialog) {
   }
 
   ngOnInit() {
@@ -32,6 +34,11 @@ export class ProductsComponent {
   }
 
   editProduct(product: Product) {
-    console.log("product editted",product)
+    const dialogRef = this.dialog
+      .open(ProducteditComponent, {data: product});
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (!result) this.loadProducts()
+    });
   }
 }
