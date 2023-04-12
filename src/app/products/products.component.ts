@@ -26,7 +26,9 @@ export class ProductsComponent {
   }
 
   deleteProduct(product: Product) {
-    console.log("product deleted",product)
+    this.productService.deleteProduct(product).subscribe(
+      () => this.loadProducts()
+    )
   }
 
   editProduct(product: Product) {

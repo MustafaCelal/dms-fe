@@ -25,6 +25,11 @@ export class ProductService {
       .pipe(map((response) => this.mapProductResponse(response)));
   }
 
+  deleteProduct(product: Product) {
+    return this.http
+      .delete<any>(`${this.apiUrl}/product/${product.id}`);
+  }
+
   private mapProductListResponse(productList: Product[]): any {
     return productList.map((product: any) => (this.mapProductResponse(product)))
   }
