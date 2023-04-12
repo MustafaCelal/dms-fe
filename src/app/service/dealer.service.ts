@@ -3,7 +3,6 @@ import {Injectable} from '@angular/core';
 import {map, Observable} from 'rxjs';
 import {Dealer} from '../interface/dealer.interface';
 
-
 @Injectable({
   providedIn: 'root',
 })
@@ -25,19 +24,22 @@ export class DealerService {
       .pipe(map((response) => this.mapDealerResponse(response)));
   }
 
+  putDealer(dealer: Dealer) {
+    return this.http.put<Dealer>(`${this.apiUrl}/dealer/${dealer.id}`, dealer).subscribe()
+  }
+
   private mapDealerListResponse(dealerList: Dealer[]): any {
     return dealerList.map((dealer: any) => (this.mapDealerResponse(dealer)))
   }
 
   private mapDealerResponse(dealer: Dealer): any {
     return <Dealer>{
-        id: +dealer.id,
-        name: dealer.name,
-        address: dealer.address,
-        phoneNumber: dealer.phoneNumber,
-        debt: +dealer.debt,
-      }
-
+      id: dealer.id,
+      name: dealer.name,
+      address: dealer.address,
+      phoneNumber: dealer.phoneNumber,
+      debt: +dealer.debt,
+    }
   }
 
 }
