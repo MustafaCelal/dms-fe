@@ -7,7 +7,7 @@ import {MatIconModule} from "@angular/material/icon";
 import {MatButtonModule} from "@angular/material/button";
 import {ProducteditComponent} from './productedit/productedit.component';
 import {MatDialogModule} from "@angular/material/dialog";
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {MatInputModule} from "@angular/material/input";
 
 
@@ -23,7 +23,8 @@ import {MatInputModule} from "@angular/material/input";
     MatButtonModule,
     MatDialogModule,
     FormsModule,
-    MatInputModule
+    MatInputModule,
+    ReactiveFormsModule
   ]
 })
 export class ProductsModule {

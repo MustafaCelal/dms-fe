@@ -1,15 +1,18 @@
-<h1 mat-dialog-title>Ürün Güncelle</h1>
-<div mat-dialog-content>
-  <mat-form-field appearance="fill" class="d-block">
-    <mat-label>Ürün adı</mat-label>
-    <input matInput [(ngModel)]="data.productName" cdkFocusInitial>
-  </mat-form-field>
-  <mat-form-field appearance="fill">
-    <mat-label>Satış Fiyatı</mat-label>
-    <input matInput [(ngModel)]="data.salePrice">
-  </mat-form-field>
-</div>
-<div mat-dialog-actions class="d-flex justify-content-evenly">
-  <button mat-button (click)="onNoClick()">Çıkış</button>
-  <button mat-button (click)="onEditClick()" [mat-dialog-close]="data">Ok</button>
-</div>
+<form [formGroup]="productForm">
+  <h1 mat-dialog-title>Ürün Güncelle</h1>
+  <div mat-dialog-content>
+    <mat-form-field appearance="fill" class="d-block">
+      <mat-label>Ürün adı</mat-label>
+      <input matInput [(ngModel)]="data.productName" formControlName="productName" cdkFocusInitial>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Satış Fiyatı</mat-label>
+      <input matInput min="0" max="9999" type="number" formControlName="salePrice" [(ngModel)]="data.salePrice">
+      <span matTextPrefix>₺</span>
+    </mat-form-field>
+  </div>
+  <div mat-dialog-actions class="d-flex justify-content-evenly">
+    <button mat-button (click)="onNoClick()">Çıkış</button>
+    <button mat-button [disabled]="!productForm.valid" [mat-dialog-close]="data">Ok</button>
+  </div>
+</form>

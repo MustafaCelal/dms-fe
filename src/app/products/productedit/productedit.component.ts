@@ -1,7 +1,7 @@
 import {Component, Inject} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
-import {ProductService} from 'src/app/service/product.service';
 import {Product} from "../../interface/product.interface";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 
 @Component({
   selector: 'app-productedit',
@@ -9,16 +9,21 @@ import {Product} from "../../interface/product.interface";
   styleUrls: ['./productedit.component.css']
 })
 export class ProducteditComponent {
+  productForm: FormGroup;
+
   constructor(public dialogRef: MatDialogRef<ProducteditComponent>,
               @Inject(MAT_DIALOG_DATA) public data: Product,
-              private productService: ProductService) {
+              private formBuilder: FormBuilder) {
+  }
+
+  ngOnInit() {
+    this.productForm = this.formBuilder.group({
+      productName: ['', Validators.required],
+      salePrice: ['', Validators.required]
+    });
   }
 
   onNoClick(): void {
     this.dialogRef.close();
-  }
-
-  onEditClick() {
-    this.productService.updateProduct(this.data).subscribe()
   }
 }

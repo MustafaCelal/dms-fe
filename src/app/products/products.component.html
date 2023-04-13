@@ -1,6 +1,7 @@
 <div class="container w-75">
   <h1 class="text-center">Ürünler</h1>
-  <table *ngIf="true" class="table table-striped text-center">
+  <button class="float-end btn btn-outline-primary m-2" (click)="addProduct()">Yeni Ürün</button>
+  <table class="table table-striped text-center">
     <thead class="table-light">
     <tr>
       <th scope="col">ID</th>
@@ -9,7 +10,6 @@
       <th scope="col">Aksiyon</th>
     </tr>
     </thead>
-
     <tbody>
     <tr *ngFor="let product of productList; let i =index" class="align-middle">
       <td>{{product.id}}</td>
