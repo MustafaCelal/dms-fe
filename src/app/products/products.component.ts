@@ -39,6 +39,18 @@ export class ProductsComponent {
 
     dialogRef.afterClosed().subscribe(result => {
       if (!result) this.loadProducts()
+      else this.productService.updateProduct(result).subscribe()
+    });
+  }
+
+  addProduct() {
+    const dialogRef = this.dialog
+      .open(ProducteditComponent, {data: {productName: "", salePrice: 0}});
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (!result) this.loadProducts()
+      else this.productService.createProduct(<Product>result).subscribe(
+        () => this.loadProducts())
     });
   }
 }

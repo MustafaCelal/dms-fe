@@ -35,6 +35,11 @@ export class ProductService {
       .put<any>(`${this.apiUrl}/product/${product.id}`, product);
   }
 
+  createProduct(product: Product) {
+    return this.http
+      .post<any>(`${this.apiUrl}/product`, product);
+  }
+
   private mapProductListResponse(productList: Product[]): any {
     return productList.map((product: any) => (this.mapProductResponse(product)))
   }
