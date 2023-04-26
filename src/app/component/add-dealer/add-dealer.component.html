@@ -1,0 +1,26 @@
+<form [formGroup]="addDealerForm" (ngSubmit)="onSubmit()" class="w-50 container">
+  <div class="justify-content-center">
+    <h1 mat-dialog-title>Bayi Ekle</h1>
+    <div mat-dialog-content>
+      <mat-form-field appearance="fill" class="d-block">
+        <mat-label>Bayi adı</mat-label>
+        <input matInput formControlName="name" cdkFocusInitial>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="d-block">
+        <mat-label>Telefon Numarası</mat-label>
+        <input matInput formControlName="phoneNumber">
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="d-block">
+        <mat-label>Adresi</mat-label>
+        <textarea matInput formControlName="address" ></textarea>
+      </mat-form-field>
+    </div>
+    <div mat-dialog-actions class="d-flex justify-content-evenly">
+
+      <button class="w-100 btn btn-lg btn-outline-primary">Ok</button>
+    </div>
+  </div>
+</form>
+

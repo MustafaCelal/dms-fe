@@ -4,12 +4,14 @@ import {DealersComponent} from './component/dealers/dealers.component';
 import {DealerdetailComponent} from './component/dealerDetail/dealerdetail.component';
 import {DeliverydetailComponent} from "./component/deliverydetail/deliverydetail.component";
 import {DeliveryComponent} from "./component/delivery/delivery.component";
+import {AddDealerComponent} from "./component/add-dealer/add-dealer.component";
 
 const routes: Routes = [
   {path: 'dealer', component: DealersComponent},
   {path: 'dealer/:id', component: DealerdetailComponent},
   {path: 'delivery/:deliveryId', component: DeliverydetailComponent},
   {path: 'delivery', component: DeliveryComponent},
+  {path: 'addDealer', component: AddDealerComponent},
   {path: 'products', loadChildren: () => import('./products/products.module').then(m => m.ProductsModule)},
   {path: '**', redirectTo: 'dealer'}
 ];
