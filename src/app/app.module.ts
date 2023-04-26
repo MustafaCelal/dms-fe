@@ -13,6 +13,9 @@ import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatSelectModule} from "@angular/material/select";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {MatInputModule} from '@angular/material/input';
+import { AddDealerComponent } from './component/add-dealer/add-dealer.component';
+import {MatButtonModule} from "@angular/material/button";
+import {MatDialogModule} from "@angular/material/dialog";
 
 @NgModule({
   declarations: [
@@ -21,6 +24,7 @@ import {MatInputModule} from '@angular/material/input';
     DealerdetailComponent,
     DeliverydetailComponent,
     DeliveryComponent,
+    AddDealerComponent,
   ],
   imports: [
     BrowserModule,
@@ -31,7 +35,9 @@ import {MatInputModule} from '@angular/material/input';
     MatSelectModule,
     MatInputModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatButtonModule,
+    MatDialogModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -28,6 +28,10 @@ export class DealerService {
     return this.http.put<Dealer>(`${this.apiUrl}/dealer/${dealer.id}`, dealer).subscribe()
   }
 
+  addDealer(dealer: Dealer) {
+    return this.http.post<Dealer>(`${this.apiUrl}/dealer`,dealer);
+  }
+
   private mapDealerListResponse(dealerList: Dealer[]): any {
     return dealerList.map((dealer: any) => (this.mapDealerResponse(dealer)))
   }
