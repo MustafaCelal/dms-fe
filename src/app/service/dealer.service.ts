@@ -25,13 +25,15 @@ export class DealerService {
   }
 
   putDealer(dealer: Dealer) {
-    return this.http.put<Dealer>(`${this.apiUrl}/dealer/${dealer.id}`, dealer).subscribe()
+    return this.http.put<Dealer>(`${this.apiUrl}/dealer/${dealer.id}`, dealer);
   }
 
   addDealer(dealer: Dealer) {
     return this.http.post<Dealer>(`${this.apiUrl}/dealer`,dealer);
   }
-
+  deleteDealer(dealer: Dealer) {
+    return this.http.delete<Dealer>(`${this.apiUrl}/dealer/${dealer.id}`);
+  }
   private mapDealerListResponse(dealerList: Dealer[]): any {
     return dealerList.map((dealer: any) => (this.mapDealerResponse(dealer)))
   }

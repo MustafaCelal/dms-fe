@@ -1,4 +1,4 @@
-<form [formGroup]="addDealerForm" (ngSubmit)="onSubmit()" class="w-50 container">
+<form [formGroup]="addDealerForm"  class="w-50 container">
   <div class="justify-content-center">
     <h1 mat-dialog-title>Bayi Ekle</h1>
     <div mat-dialog-content>
@@ -19,7 +19,9 @@
     </div>
     <div mat-dialog-actions class="d-flex justify-content-evenly">
 
-      <button class="w-100 btn btn-lg btn-outline-primary">Ok</button>
+      <button *ngIf="!dealer" (click)="onSubmit()" class="w-100 btn btn-lg btn-outline-primary">Ok</button>
+      <button *ngIf="dealer" (click)="deleteDealer()" class="w-100 btn btn-lg btn-outline-danger me-1">Bayiyi sil</button>
+      <button *ngIf="dealer" (click)="saveDealer()" class="w-100 btn btn-lg btn-outline-primary ms-1">Kaydet</button>
     </div>
   </div>
 </form>
